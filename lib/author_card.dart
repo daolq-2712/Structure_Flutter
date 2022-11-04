@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:structureflutter/theme/fooderlich_theme.dart';
 import 'package:structureflutter/widgets/circle_image.dart';
 
-class AuthorCard extends StatelessWidget {
+class AuthorCard extends StatefulWidget {
   final String authorName;
   final String title;
   final ImageProvider? imageProvider;
@@ -15,6 +15,13 @@ class AuthorCard extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<AuthorCard> createState() => _AuthorCardState();
+}
+
+class _AuthorCardState extends State<AuthorCard> {
+  bool _isFavorite = false;
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
@@ -22,29 +29,30 @@ class AuthorCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           CircleImage(
-            imageProvider: imageProvider,
+            imageProvider: widget.imageProvider,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                authorName,
+                widget.authorName,
                 style: FooderlichTheme.lightTextTheme.headline2,
               ),
               Text(
-                title,
+                widget.title,
                 style: FooderlichTheme.lightTextTheme.headline3,
               )
             ],
           ),
           IconButton(
             onPressed: () {
-              const snackBar = SnackBar(content: Text('Favorite Press'));
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              setState(() {
+                _isFavorite = !_isFavorite;
+              });
             },
-            icon: const Icon(Icons.favorite_outline),
+            icon: Icon(_isFavorite ? Icons.favorite : Icons.favorite_border),
             iconSize: 30,
-            color: Colors.grey[400],
+            color: Colors.red[400],
           ),
         ],
       ),
