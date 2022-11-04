@@ -1,3 +1,5 @@
+part 'ingredient.dart';
+
 class ExploreRecipe {
   String id;
   String cardType;
@@ -74,26 +76,6 @@ class ExploreRecipe {
       source: json['source'] ?? '',
       ingredients: ingredients,
       instructions: instructions,
-    );
-  }
-}
-
-class Ingredients {
-  String imageUrl;
-  String title;
-  String source;
-
-  Ingredients({
-    required this.imageUrl,
-    required this.title,
-    required this.source,
-  });
-
-  factory Ingredients.fromJson(Map<String, dynamic> json) {
-    return Ingredients(
-      imageUrl: json['imageUrl'] ?? '',
-      title: json['title'] ?? '',
-      source: json['source'] ?? '',
     );
   }
 }
