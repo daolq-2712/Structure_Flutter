@@ -5,7 +5,7 @@ class ExploreData {
   final List<Post> friendPosts;
 
   ExploreData(
-      this.todayRecipes,
-      this.friendPosts,
-      );
+    this.todayRecipes,
+    this.friendPosts,
+  );
 }

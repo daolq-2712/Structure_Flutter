@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:structureflutter/components/author_card.dart';
+import 'package:structureflutter/models/explore_recipe.dart';
 import 'package:structureflutter/theme/fooderlich_theme.dart';
 
 class Card2 extends StatelessWidget {
-  const Card2({Key? key}) : super(key: key);
+
+  final ExploreRecipe recipe;
+
+  const Card2({Key? key, required this.recipe}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

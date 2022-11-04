@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import '../models/models.dart';
 
 class MockFooderlichService {
-
   // Batch request that gets both today recipes and friend's feed
   Future<ExploreData> getExploreData() async {
     final todayRecipes = await _getTodayRecipes();
@@ -20,7 +19,7 @@ class MockFooderlichService {
     await Future.delayed(const Duration(milliseconds: 1000));
     // Load json from file system
     final dataString =
-    await _loadAsset('assets/sample_data/sample_explore_recipes.json');
+        await _loadAsset('assets/sample_data/sample_explore_recipes.json');
     // Decode to json
     final Map<String, dynamic> json = jsonDecode(dataString);
 
@@ -42,7 +41,7 @@ class MockFooderlichService {
     await Future.delayed(const Duration(milliseconds: 1000));
     // Load json from file system
     final dataString =
-    await _loadAsset('assets/sample_data/sample_friends_feed.json');
+        await _loadAsset('assets/sample_data/sample_friends_feed.json');
     // Decode to json
     final Map<String, dynamic> json = jsonDecode(dataString);
 
@@ -64,7 +63,7 @@ class MockFooderlichService {
     await Future.delayed(const Duration(milliseconds: 1000));
     // Load json from file system
     final dataString =
-    await _loadAsset('assets/sample_data/sample_recipes.json');
+        await _loadAsset('assets/sample_data/sample_recipes.json');
     // Decode to json
     final Map<String, dynamic> json = jsonDecode(dataString);
 
