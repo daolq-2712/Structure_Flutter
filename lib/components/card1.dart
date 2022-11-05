@@ -7,11 +7,6 @@ class Card1 extends StatelessWidget {
 
   const Card1({Key? key, required this.recipe}) : super(key: key);
 
-  final String category = 'Editor\'s Choice';
-  final String title = 'The Art of Dough';
-  final String description = 'Learn to make the perfect bread.';
-  final String chef = 'Ray Wenderlich';
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,8 +16,8 @@ class Card1 extends StatelessWidget {
         height: 450,
       ),
       decoration: BoxDecoration(
-        image: const DecorationImage(
-          image: AssetImage('assets/mag1.png'),
+        image: DecorationImage(
+          image: AssetImage(recipe.backgroundImage),
           fit: BoxFit.cover,
         ),
         border: Border.all(color: Colors.black, width: 2.0),
@@ -34,13 +29,13 @@ class Card1 extends StatelessWidget {
       child: Stack(
         children: [
           Text(
-            category,
+            recipe.subtitle,
             style: FooderlichTheme.darkTextTheme.bodyText1,
           ),
           Positioned(
             top: 20,
             child: Text(
-              title,
+              recipe.title,
               style: FooderlichTheme.darkTextTheme.headline5,
             ),
           ),
@@ -48,7 +43,7 @@ class Card1 extends StatelessWidget {
             bottom: 30,
             right: 0,
             child: Text(
-              description,
+              recipe.message,
               style: FooderlichTheme.darkTextTheme.bodyText1,
             ),
           ),
@@ -56,7 +51,7 @@ class Card1 extends StatelessWidget {
             bottom: 10,
             right: 10,
             child: Text(
-              chef,
+              recipe.authorName,
               style: FooderlichTheme.darkTextTheme.bodyText1,
             ),
           ),

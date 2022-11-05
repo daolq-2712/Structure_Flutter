@@ -4,7 +4,6 @@ import 'package:structureflutter/models/explore_recipe.dart';
 import 'package:structureflutter/theme/fooderlich_theme.dart';
 
 class Card2 extends StatelessWidget {
-
   final ExploreRecipe recipe;
 
   const Card2({Key? key, required this.recipe}) : super(key: key);
@@ -16,8 +15,8 @@ class Card2 extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
-        image: const DecorationImage(
-          image: AssetImage('assets/mag5.png'),
+        image: DecorationImage(
+          image: AssetImage(recipe.backgroundImage),
           fit: BoxFit.cover,
         ),
         border: Border.all(
@@ -30,10 +29,10 @@ class Card2 extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const AuthorCard(
-            authorName: 'Mike Katz',
-            title: 'Smoothie Connoisseur',
-            imageProvider: AssetImage('assets/author_katz.jpeg'),
+          AuthorCard(
+            authorName: recipe.authorName,
+            title: recipe.title,
+            imageProvider: AssetImage(recipe.backgroundImage),
           ),
           Expanded(
             child: Stack(children: [
@@ -43,7 +42,7 @@ class Card2 extends StatelessWidget {
                 child: RotatedBox(
                   quarterTurns: 45,
                   child: Text(
-                    'Smoothies',
+                    recipe.title,
                     style: FooderlichTheme.lightTextTheme.headline1,
                   ),
                 ),
@@ -52,7 +51,7 @@ class Card2 extends StatelessWidget {
                 bottom: 16,
                 right: 10,
                 child: Text(
-                  'Recipe',
+                  recipe.subtitle,
                   style: FooderlichTheme.lightTextTheme.headline1,
                 ),
               )
