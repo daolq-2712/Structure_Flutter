@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:structureflutter/models/models.dart';
 
 class GroceryManager extends ChangeNotifier {
-
   final _groceryItems = <GroceryItem>[];
 
   List<GroceryItem> get groceryItems => List.unmodifiable(_groceryItems);
