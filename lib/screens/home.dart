@@ -42,6 +42,9 @@ class _HomeState extends State<Home> {
           // 2
           style: Theme.of(context).textTheme.headline6,
         ),
+        actions: [
+          _profileButton(),
+        ],
       ),
       body: IndexedStack(
         index: widget.currentTab,
@@ -69,43 +72,23 @@ class _HomeState extends State<Home> {
         ],
       ),
     );
-    // return Consumer<AppStateManager>(
-    //     builder: (context, appStateManager, child) {
-    //       return Scaffold(
-    //         appBar: AppBar(
-    //           title: Text(
-    //             'Fooderlich',
-    //             // 2
-    //             style: Theme.of(context).textTheme.headline6,
-    //           ),
-    //         ),
-    //         body: IndexedStack(
-    //           index: widget.currentTab,
-    //           children: pages,
-    //         ),
-    //         bottomNavigationBar: BottomNavigationBar(
-    //           currentIndex: widget.currentTab,
-    //           onTap: (index) {
-    //             Provider.of<AppStateManager>(context, listen: false).goToTab(index);
-    //           },
-    //           selectedItemColor:
-    //           Theme.of(context).textSelectionTheme.selectionColor,
-    //           items: const [
-    //             BottomNavigationBarItem(
-    //               icon: Icon(Icons.explore),
-    //               label: 'Explore',
-    //             ),
-    //             BottomNavigationBarItem(
-    //               icon: Icon(Icons.book),
-    //               label: 'Recipes',
-    //             ),
-    //             BottomNavigationBarItem(
-    //               icon: Icon(Icons.list),
-    //               label: 'To Buy',
-    //             ),
-    //           ],
-    //         ),
-    //       );
-    //     });
+  }
+
+  Widget _profileButton() {
+    return Padding(
+      padding: const EdgeInsets.only(right: 16.0),
+      child: GestureDetector(
+        child: const CircleAvatar(
+          backgroundColor: Colors.transparent,
+          backgroundImage: AssetImage(
+            'assets/profile_pics/person_stef.jpeg',
+          ),
+        ),
+        onTap: () {
+          Provider.of<ProfileManager>(context, listen: false)
+              .tapOnProfile(true);
+        },
+      ),
+    );
   }
 }

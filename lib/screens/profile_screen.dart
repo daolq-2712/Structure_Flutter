@@ -4,16 +4,23 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:url_launcher/url_launcher.dart';
 
 import '../components/circle_image.dart';
+import '../fooderlich_pages.dart';
 import '../models/models.dart';
 
 import 'dart:io';
 
 class ProfileScreen extends StatefulWidget {
-  final User user;
-  final int currentTab;
+  static MaterialPage page(User user) {
+    return MaterialPage(
+      name: FooderlichPages.profilePath,
+      key: ValueKey(FooderlichPages.profilePath),
+      child: ProfileScreen(user: user),
+    );
+  }
 
-  const ProfileScreen(
-      {super.key, required this.user, required this.currentTab});
+  final User user;
+
+  const ProfileScreen({super.key, required this.user});
 
   @override
   ProfileScreenState createState() => ProfileScreenState();
@@ -94,14 +101,17 @@ class ProfileScreenState extends State<ProfileScreen> {
             if (kIsWeb || Platform.isMacOS) {
               await launchUrl(Uri.parse('https://www.raywenderlich.com/'));
             } else {
-              // TODO: Navigate to WebView
+              Provider.of<ProfileManager>(context, listen: false)
+                  .tapOnRaywenderlich(true);
             }
           },
         ),
         ListTile(
           title: const Text('Log out'),
           onTap: () {
-            // TODO: Logout user
+            Provider.of<ProfileManager>(context, listen: false)
+                .tapOnProfile(false);
+            Provider.of<AppStateManager>(context, listen: false).logout();
           },
         )
       ],

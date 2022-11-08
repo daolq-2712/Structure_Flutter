@@ -23,7 +23,9 @@ class GroceryScreen extends StatelessWidget {
                     manager.addItem(item);
                     Navigator.pop(context);
                   },
-                  onUpdate: (item) {},
+                  onUpdate: (item, index) {
+                    // No-op
+                  },
                 ),
               ));
         },
