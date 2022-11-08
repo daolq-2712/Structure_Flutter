@@ -3,13 +3,12 @@ import 'package:provider/provider.dart';
 
 import 'app_router.dart';
 import 'models/models.dart';
-import 'screens/screens.dart';
 import 'theme/fooderlich_theme.dart';
 // TODO: Import app_router
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(Fooderlich());
+  runApp(const Fooderlich());
 }
 
 class Fooderlich extends StatefulWidget {
@@ -64,7 +63,7 @@ class FooderlichState extends State<Fooderlich> {
             title: 'Fooderlich',
             home: Router(
               routerDelegate: _appRouter,
-              // TODO: Add backButtonDispatcher
+              backButtonDispatcher: RootBackButtonDispatcher(),
             ),
           );
         },

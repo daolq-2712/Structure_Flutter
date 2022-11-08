@@ -112,7 +112,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         MaterialButton(
-            child: Text('Skip'),
+            child: const Text('Skip'),
             onPressed: () {
               Provider.of<AppStateManager>(context, listen: false)
                   .completeOnBoarding();

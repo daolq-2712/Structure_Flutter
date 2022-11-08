@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:structureflutter/components/grocery_tile.dart';
 import 'package:structureflutter/models/grocery_item.dart';
 import 'package:uuid/uuid.dart';
-
 import '../fooderlich_pages.dart';
 
 class GroceryItemScreen extends StatefulWidget {
