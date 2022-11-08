@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../fooderlich_pages.dart';
+import '../models/models.dart';
+
 class OnBoardingScreen extends StatefulWidget {
+  static MaterialPage page() {
+    return MaterialPage(
+      name: FooderlichPages.onboardingPath,
+      key: ValueKey(FooderlichPages.onboardingPath),
+      child: const OnBoardingScreen(),
+    );
+  }
+
   const OnBoardingScreen({Key? key}) : super(key: key);
 
   @override
@@ -16,10 +28,18 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: const Text('Getting started'),
-      ),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: const Text('Getting started'),
+          leading: GestureDetector(
+            child: const Icon(
+              Icons.chevron_left,
+              size: 40,
+            ),
+            onTap: () {
+              Navigator.pop(context, true);
+            },
+          )),
       body: SafeArea(
         child: Column(
           children: [
@@ -91,9 +111,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        MaterialButton(onPressed: () {
-          // TODO: Initiate onBoarding
-        }),
+        MaterialButton(
+            child: Text('Skip'),
+            onPressed: () {
+              Provider.of<AppStateManager>(context, listen: false)
+                  .completeOnBoarding();
+            }),
       ],
     );
   }

@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-import 'app_cahe.dart';
+import 'package:flutter/material.dart';
 
 class FooderlichTab {
   static const int explore = 0;
@@ -9,24 +9,43 @@ class FooderlichTab {
 }
 
 class AppStateManager extends ChangeNotifier {
+  bool _initialized = false;
+
   // Checks to see if the user is logged in
   bool _loggedIn = false;
+
   // Checks to see if the user has completed onboarding
   bool _onboardingComplete = false;
+
   // Records the current tab the user is on.
   int _selectedTab = FooderlichTab.explore;
-  // Stores user state properties on platform specific file system.
-  final _appCache = AppCache();
 
-  // Initializes the app
-  Future<void> initializeApp() async {
-    // Check if the user is logged in
-    _loggedIn = await _appCache.isUserLoggedIn();
-    // Check if the user completed onboarding
-    _onboardingComplete = await _appCache.didCompleteOnBoarding();
+  bool get isInitialized => _initialized;
+
+  bool get isLoggedIn => _loggedIn;
+
+  bool get isOnBoardingComplete => _onboardingComplete;
+
+  int get getSelectedTab => _selectedTab;
+
+  void initializeApp() {
+    Timer(const Duration(milliseconds: 2000), () {
+      _initialized = true;
+      notifyListeners();
+    });
   }
 
-  void goToTab(int index) {
+  void login(String userName, String password) {
+    _loggedIn = true;
+    notifyListeners();
+  }
+
+  void completeOnBoarding() {
+    _onboardingComplete = true;
+    notifyListeners();
+  }
+
+  void goToTab(index) {
     _selectedTab = index;
     notifyListeners();
   }
@@ -36,15 +55,13 @@ class AppStateManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  void logout() async {
-    // Reset all properties once user logs out
+  void logout() {
+    // 12
     _loggedIn = false;
     _onboardingComplete = false;
+    _initialized = false;
     _selectedTab = 0;
-
-    // Reinitialize the app
-    await _appCache.invalidate();
-    await initializeApp();
+    initializeApp();
     notifyListeners();
   }
 }

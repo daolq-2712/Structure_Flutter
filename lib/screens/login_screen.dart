@@ -1,6 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../fooderlich_pages.dart';
+import '../models/models.dart';
 
 class LoginScreen extends StatelessWidget {
+  static MaterialPage page() {
+    return MaterialPage(
+      name: FooderlichPages.loginPath,
+      key: ValueKey(FooderlichPages.loginPath),
+      child: const LoginScreen(),
+    );
+  }
+
   final String? username;
 
   const LoginScreen({
@@ -56,7 +68,8 @@ class LoginScreen extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
         onPressed: () async {
-          // TODO: Initiate Login
+          Provider.of<AppStateManager>(context, listen: false)
+              .login('mockUsername', 'mockPassword');
         },
       ),
     );
