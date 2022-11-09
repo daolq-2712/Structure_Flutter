@@ -18,6 +18,10 @@ dependencies:
   intl: ^0.17.0
   uuid: ^3.0.4
 
+  cached_network_image: ^3.1.0
+  flutter_slidable: ^0.6.0
+  flutter_svg: ^0.22.0
+
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
@@ -38,8 +42,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
-    - assets/food_pics/
-    - assets/magazine_pics/
-    - assets/sample_data/
-    - assets/profile_pics/
-    - assets/fooderlich_assets/
+    - assets/images/
