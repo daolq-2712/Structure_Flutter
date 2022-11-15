@@ -35,7 +35,7 @@ Widget recipeCard(APIRecipe recipe) {
         Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child: Text(
-            recipe.getCalories(recipe.calories),
+            getCalories(recipe.calories),
             style: const TextStyle(
               fontWeight: FontWeight.normal,
               fontSize: 11,

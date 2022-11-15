@@ -89,6 +89,6 @@ APIIngredients _$APIIngredientsFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$APIIngredientsToJson(APIIngredients instance) =>
     <String, dynamic>{
-      'text': instance.text,
+      'text': instance.name,
       'weight': instance.weight,
     };

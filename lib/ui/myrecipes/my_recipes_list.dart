@@ -1,40 +1,43 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:provider/provider.dart';
+
+import '../../data/models/recipe.dart';
+import '../../data/memory_repository.dart';
 
 class MyRecipesList extends StatefulWidget {
   const MyRecipesList({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _MyRecipesListState createState() => _MyRecipesListState();
 }
 
 class _MyRecipesListState extends State<MyRecipesList> {
-  // TODO 1
-  List<String> recipes = [];
+  List<Recipe> recipes = [];
 
-  // TODO 2
   @override
   void initState() {
     super.initState();
-    recipes = <String>[];
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: _buildRecipeList(context),
-    );
+    return Consumer<MemoryRepository>(builder: (context, repository, child) {
+      recipes = repository.findAllRecipes();
+      return Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: _buildRecipeList(context, repository),
+      );
+    });
   }
 
-  Widget _buildRecipeList(BuildContext context) {
-    // TODO 3
+  Widget _buildRecipeList(BuildContext context, MemoryRepository repository) {
     return ListView.builder(
         itemCount: recipes.length,
         itemBuilder: (BuildContext context, int index) {
-          // TODO 4
+          final recipe = recipes[index];
           return SizedBox(
             height: 100,
             child: Slidable(
@@ -42,21 +45,21 @@ class _MyRecipesListState extends State<MyRecipesList> {
               actionExtentRatio: 0.25,
               actions: <Widget>[
                 IconSlideAction(
-                    caption: 'Delete',
-                    color: Colors.transparent,
-                    foregroundColor: Colors.black,
-                    iconWidget: const Icon(Icons.delete, color: Colors.red),
-                    // TODO 7
-                    onTap: () {})
+                  caption: 'Delete',
+                  color: Colors.transparent,
+                  foregroundColor: Colors.black,
+                  iconWidget: const Icon(Icons.delete, color: Colors.red),
+                  onTap: () => deleteRecipe(repository, recipe),
+                )
               ],
               secondaryActions: <Widget>[
                 IconSlideAction(
-                    caption: 'Delete',
-                    color: Colors.transparent,
-                    foregroundColor: Colors.black,
-                    iconWidget: const Icon(Icons.delete, color: Colors.red),
-                    // TODO 8
-                    onTap: () {})
+                  caption: 'Delete',
+                  color: Colors.transparent,
+                  foregroundColor: Colors.black,
+                  iconWidget: const Icon(Icons.delete, color: Colors.red),
+                  onTap: () => deleteRecipe(repository, recipe),
+                )
               ],
               child: Card(
                 elevation: 1.0,
@@ -70,14 +73,11 @@ class _MyRecipesListState extends State<MyRecipesList> {
                     padding: const EdgeInsets.all(8.0),
                     child: ListTile(
                       leading: CachedNetworkImage(
-                          // TODO 5
-                          imageUrl:
-                              'http://www.seriouseats.com/recipes/2011/12/chicken-vesuvio-recipe.html',
+                          imageUrl: recipe.image ?? '',
                           height: 120,
                           width: 60,
                           fit: BoxFit.cover),
-                      // TODO 6
-                      title: const Text('Chicken Vesuvio'),
+                      title: Text(recipe.label ?? ''),
                     ),
                   ),
                 ),
@@ -86,5 +86,16 @@ class _MyRecipesListState extends State<MyRecipesList> {
           );
         });
     // TODO 9
+  }
+
+  void deleteRecipe(MemoryRepository repository, Recipe recipe) {
+    if (recipe.id != null) {
+      repository.deleteRecipe(recipe);
+      setState(() {});
+    } else {
+      if (kDebugMode) {
+        print('Recipe id is null');
+      }
+    }
   }
 }

@@ -1,11 +1,12 @@
 import 'dart:math';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../mock_service/mock_service.dart';
 import '../../network/model_response.dart';
 import '../../network/recipe_model.dart';
-import '../../network/recipe_service.dart';
 import '../colors.dart';
 import '../recipe_card.dart';
 import '../widgets/custom_dropdown.dart';
@@ -190,7 +191,7 @@ class _RecipeListState extends State<RecipeList> {
     }
     // Show a loading indicator while waiting for the movies
     return FutureBuilder<Response<Result<APIRecipeQuery>>>(
-        future: RecipeService.create().queryRecipes(
+        future: Provider.of<MockService>(context).queryRecipes(
           searchTextController.text.trim(),
           currentStartPosition,
           currentEndPosition,
@@ -260,17 +261,19 @@ class _RecipeListState extends State<RecipeList> {
 
 Widget _buildRecipeCard(
     BuildContext topLevelContext, List<APIHits> hits, int index) {
-  final recipe = hits[index].recipe;
+  final apiRecipe = hits[index].recipe;
 
   return GestureDetector(
     onTap: () {
       Navigator.push(topLevelContext, MaterialPageRoute(
         builder: (context) {
-          return const RecipeDetails();
+          final detailRecipe = apiRecipe.toRecipe();
+          detailRecipe.ingredients = convertIngredients(apiRecipe.ingredients);
+          return RecipeDetails(recipe: detailRecipe);
         },
       ));
     },
 // 2
-    child: recipeCard(recipe),
+    child: recipeCard(apiRecipe),
   );
 }

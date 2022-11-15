@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../data/models/models.dart';
+
 part 'recipe_model.g.dart';
 
 @JsonSerializable()
@@ -89,21 +91,24 @@ class APIRecipe {
     return _$APIRecipeToJson(this);
   }
 
-  String getCalories(double? calories) {
-    if (calories == null) {
-      return '0 KCAL';
-    }
-    return '${calories.floor()} KCAL';
+  Recipe toRecipe() {
+    return Recipe(
+        label: label,
+        image: image,
+        url: url,
+        calories: calories,
+        totalTime: totalTime,
+        totalWeight: totalWeight);
   }
 }
 
 @JsonSerializable()
 class APIIngredients {
-  String text;
+  String name;
   double weight;
 
   APIIngredients(
-    this.text,
+    this.name,
     this.weight,
   );
 
@@ -114,4 +119,22 @@ class APIIngredients {
   Map<String, dynamic> toJson() {
     return _$APIIngredientsToJson(this);
   }
+}
+
+String getCalories(double? calories) {
+  if (calories == null) {
+    return '0 KCAL';
+  }
+  return '${calories.floor()} KCAL';
+}
+
+List<Ingredient> convertIngredients(List<APIIngredients> apiIngredients) {
+// 1
+  final ingredients = <Ingredient>[];
+  // 2
+  for (var ingredient in apiIngredients) {
+    ingredients
+        .add(Ingredient(name: ingredient.name, weight: ingredient.weight));
+  }
+  return ingredients;
 }
