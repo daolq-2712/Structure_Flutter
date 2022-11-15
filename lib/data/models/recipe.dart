@@ -1,9 +1,11 @@
 import 'package:equatable/equatable.dart';
+import 'package:uuid/uuid.dart';
 
 import 'ingredient.dart';
 
+//ignore: must_be_immutable
 class Recipe extends Equatable {
-  int? id;
+  final String id = const Uuid().v1();
   final String? label;
   final String? image;
   final String? url;
@@ -14,7 +16,6 @@ class Recipe extends Equatable {
   final double? totalTime;
 
   Recipe({
-    this.id,
     this.label,
     this.image,
     this.url,

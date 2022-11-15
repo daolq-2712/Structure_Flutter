@@ -5,17 +5,18 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 
 import '../../data/models/recipe.dart';
-import '../../data/memory_repository.dart';
+import '../../data/repository.dart';
 
 class MyRecipesList extends StatefulWidget {
   const MyRecipesList({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _MyRecipesListState createState() => _MyRecipesListState();
 }
 
 class _MyRecipesListState extends State<MyRecipesList> {
-  List<Recipe> recipes = [];
+  final List<Recipe> _recipes = [];
 
   @override
   void initState() {
@@ -24,20 +25,29 @@ class _MyRecipesListState extends State<MyRecipesList> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<MemoryRepository>(builder: (context, repository, child) {
-      recipes = repository.findAllRecipes();
-      return Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: _buildRecipeList(context, repository),
-      );
-    });
+    final repository = Provider.of<Repository>(context, listen: false);
+    return StreamBuilder<List<Recipe>>(
+      stream: repository.watchAllRecipes(),
+      builder: (context, AsyncSnapshot<List<Recipe>> snapshot) {
+        if (snapshot.connectionState == ConnectionState.active) {
+          final recipes = snapshot.data ?? [];
+          _recipes.addAll(recipes);
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: _buildRecipeList(context, repository),
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
   }
 
-  Widget _buildRecipeList(BuildContext context, MemoryRepository repository) {
+  Widget _buildRecipeList(BuildContext context, Repository repository) {
     return ListView.builder(
-        itemCount: recipes.length,
+        itemCount: _recipes.length,
         itemBuilder: (BuildContext context, int index) {
-          final recipe = recipes[index];
+          final recipe = _recipes[index];
           return SizedBox(
             height: 100,
             child: Slidable(
@@ -88,7 +98,7 @@ class _MyRecipesListState extends State<MyRecipesList> {
     // TODO 9
   }
 
-  void deleteRecipe(MemoryRepository repository, Recipe recipe) {
+  void deleteRecipe(Repository repository, Recipe recipe) {
     if (recipe.id != null) {
       repository.deleteRecipe(recipe);
       setState(() {});
