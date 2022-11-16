@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:structureflutter/data/models/ingredient.dart';
+
+import '../../data/repository.dart';
 
 class ShoppingList extends StatefulWidget {
   const ShoppingList({Key? key}) : super(key: key);
@@ -10,27 +14,41 @@ class ShoppingList extends StatefulWidget {
 
 class _ShoppingListState extends State<ShoppingList> {
   final checkBoxValues = <int, bool>{};
-  static const ingredients = <String>[];
+  final _ingredients = <Ingredient>[];
 
   @override
   Widget build(BuildContext context) {
-    // TODO 2
-    return ListView.builder(
-        itemCount: ingredients.length,
-        itemBuilder: (BuildContext context, int index) {
-          return CheckboxListTile(
-            value: checkBoxValues.containsKey(index) && checkBoxValues[index]!,
-            // TODO 3
-            title: Text(ingredients[index]),
-            onChanged: (newValue) {
-              if (newValue != null) {
-                setState(() {
-                  checkBoxValues[index] = newValue;
+    final repository = Provider.of<Repository>(context);
+    return StreamBuilder(
+        stream: repository.watchAllIngredients(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.active) {
+            final ingredients = snapshot.data;
+            if (ingredients != null) {
+              _ingredients.addAll(ingredients);
+            }
+            if (_ingredients.isEmpty) {
+              return Container();
+            }
+            return ListView.builder(
+                itemCount: _ingredients.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return CheckboxListTile(
+                    value: checkBoxValues.containsKey(index) &&
+                        checkBoxValues[index]!,
+                    title: Text(_ingredients[index].name ?? ''),
+                    onChanged: (newValue) {
+                      if (newValue != null) {
+                        setState(() {
+                          checkBoxValues[index] = newValue;
+                        });
+                      }
+                    },
+                  );
                 });
-              }
-            },
-          );
+          } else {
+            return Container();
+          }
         });
-    // TODO 4
   }
 }
