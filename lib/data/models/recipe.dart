@@ -1,11 +1,10 @@
 import 'package:equatable/equatable.dart';
-import 'package:uuid/uuid.dart';
 
 import 'ingredient.dart';
 
 //ignore: must_be_immutable
 class Recipe extends Equatable {
-  final String id = const Uuid().v1();
+  final int? id;
   final String? label;
   final String? image;
   final String? url;
@@ -16,6 +15,7 @@ class Recipe extends Equatable {
   final double? totalTime;
 
   Recipe({
+    this.id,
     this.label,
     this.image,
     this.url,
@@ -23,6 +23,30 @@ class Recipe extends Equatable {
     this.totalWeight,
     this.totalTime,
   });
+
+  factory Recipe.fromJson(Map<String, dynamic> json) {
+    return Recipe(
+      id: json["recipeId"],
+      label: json["label"],
+      image: json["image"],
+      url: json["url"],
+      calories: double.parse(json["calories"]),
+      totalWeight: double.parse(json["totalWeight"]),
+      totalTime: double.parse(json["totalTime"]),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "recipeId": id,
+      "label": label,
+      "image": image,
+      "url": url,
+      "calories": calories,
+      "totalWeight": totalWeight,
+      "totalTime": totalTime,
+    };
+  }
 
   @override
   List<Object?> get props =>

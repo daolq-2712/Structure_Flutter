@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../data/models/models.dart';
@@ -93,6 +94,7 @@ class APIRecipe {
 
   Recipe toRecipe() {
     return Recipe(
+        id: Random().nextInt(999),
         label: label,
         image: image,
         url: url,

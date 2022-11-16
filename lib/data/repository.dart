@@ -19,7 +19,7 @@ abstract class Repository {
 
   Future<void> deleteIngredients(List<Ingredient> ingredients);
 
-  Future<void> deleteRecipeIngredients(String recipeId);
+  Future<void> deleteRecipeIngredients(int recipeId);
 
   Stream<List<Recipe>> watchAllRecipes();
 

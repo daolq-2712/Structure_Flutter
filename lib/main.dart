@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import '../data/repository.dart';
 import '../network/recipe_service.dart';
 import '../network/service_interface.dart';
-import 'data/memory_repository.dart';
+import 'data/sqlite_repository.dart';
 import 'ui/main_screen.dart';
 
 Future<void> main() async {
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       providers: [
         Provider<Repository>(
           lazy: false,
-          create: (_) => MemoryRepository(),
+          create: (_) => SqliteRepository(),
         ),
         Provider<ServiceInterface>(
           lazy: false,

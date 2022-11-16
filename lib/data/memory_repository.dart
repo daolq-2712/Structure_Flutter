@@ -91,7 +91,7 @@ class MemoryRepository extends Repository {
   }
 
   @override
-  Future<void> deleteRecipeIngredients(String recipeId) async {
+  Future<void> deleteRecipeIngredients(int recipeId) async {
     _currentIngredients
         .removeWhere((ingredient) => ingredient.recipeId == recipeId);
   }
