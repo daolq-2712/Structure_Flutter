@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 
-import '../env/debug_env.dart';
+const API_KEY = '2f9b69f9f2a5fb16a394b3d2b7d78ada';
+const API_ID = '63349974';
+const API_URL = 'https://api.edamam.com/api/recipes/v2';
 
 class RecipeService {
   // 1
@@ -28,7 +30,7 @@ class RecipeService {
   Future<dynamic> getRecipes(String query, int from, int to) async {
 // 2
     final recipeData = await _getData(
-        '${DebugEnv.API_URL}?app_id=${DebugEnv.API_ID}&app_key=${DebugEnv.API_KEY}&q=$query&from=$from&to=$to');
+        '$API_URL?app_id=$API_ID&app_key=$API_KEY&q=$query&from=$from&to=$to');
     // 3
     return recipeData;
   }

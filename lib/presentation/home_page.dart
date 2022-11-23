@@ -3,20 +3,20 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'colors.dart';
-import 'myrecipes/my_recipes_list.dart';
-import 'recipes/recipe_list.dart';
-import 'shopping/shopping_list.dart';
+import '/utils/colors.dart';
+import 'myrecipes/my_recipes_list_page.dart';
+import 'recipeList/recipe_list_page.dart';
+import 'shopping/shopping_list_page.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
-  _MainScreenState createState() => _MainScreenState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   List<Widget> pageList = <Widget>[];
 

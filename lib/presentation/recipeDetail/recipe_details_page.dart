@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../colors.dart';
+import '/utils/colors.dart';
 
 class RecipeDetails extends StatelessWidget {
   const RecipeDetails({Key? key}) : super(key: key);

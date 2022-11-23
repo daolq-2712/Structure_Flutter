@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'ui/main_screen.dart';
+import 'presentation/home_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const MainScreen(),
+      home: const HomePage(),
     );
   }
 }
