@@ -1,13 +1,13 @@
-import 'dart:convert';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:structureflutter/data/repository/search_repository_impl.dart';
-import 'package:structureflutter/data/search_repository.dart';
 
-import '/data/remote/model/recipe_model.dart';
-import '/data/remote/recipe_service_api.dart';
+import '../../data/remote/response/recipe_model.dart';
+import '/data/recipe_repository.dart';
+import '/data/repository/recipe_repository_impl.dart';
+import '/data/repository/search_repository_impl.dart';
+import '/data/search_repository.dart';
 import '/utils/colors.dart';
+
 import '../widgets/custom_dropdown.dart';
 import '../recipeDetail/recipe_details_page.dart';
 
@@ -20,6 +20,7 @@ class RecipeList extends StatefulWidget {
 
 class RecipeListState extends State<RecipeList> {
   late SearchRepository _searchRepository;
+  late RecipeRepository _recipeRepository;
 
   late TextEditingController searchTextController;
 
@@ -42,6 +43,7 @@ class RecipeListState extends State<RecipeList> {
   void _initData() async {
     searchTextController = TextEditingController(text: '');
     _searchRepository = await SearchRepositoryImpl.getInstance();
+    _recipeRepository = RecipeRepositoryImpl.instance;
 
     previousSearches = await _searchRepository.getSearchHistory();
   }
@@ -50,13 +52,6 @@ class RecipeListState extends State<RecipeList> {
   void dispose() {
     searchTextController.dispose();
     super.dispose();
-  }
-
-  Future<APIRecipeQuery> _getRecipeData(String query, int from, int to) async {
-    final recipeJson = await RecipeService().getRecipes(query, from, to);
-    final recipeMap = json.decode(recipeJson);
-
-    return APIRecipeQuery.fromJson(recipeMap);
   }
 
   @override
@@ -172,7 +167,7 @@ class RecipeListState extends State<RecipeList> {
     }
     // Show a loading indicator while waiting for the movies
     return FutureBuilder<APIRecipeQuery>(
-        future: _getRecipeData(
+        future: _recipeRepository.getSearchRecipe(
           searchTextController.text.trim(),
           currentStartPosition,
           currentEndPosition,

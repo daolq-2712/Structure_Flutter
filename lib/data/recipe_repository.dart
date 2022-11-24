@@ -1,5 +1,7 @@
+import 'remote/response/recipe_model.dart';
+
 abstract class RecipeRepository {
-  void getSearchRecipe();
+  Future<APIRecipeQuery> getSearchRecipe(String query, int fromIndex, int toIndex);
 
   void getRecipeDetails();
 }
