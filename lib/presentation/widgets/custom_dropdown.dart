@@ -11,8 +11,7 @@ class CustomDropdownMenuItem<T> extends PopupMenuEntry<T> {
   final Function? callback;
 
   @override
-  // ignore: library_private_types_in_public_api
-  _CustomDropdownMenuItemState<T> createState() =>
+  State<CustomDropdownMenuItem<T>> createState() =>
       _CustomDropdownMenuItemState<T>();
 
   @override

@@ -1,6 +1,6 @@
-import '/data/local/shared_pref_api.dart';
-import '/data/local/shared_pref_impl.dart';
-import '/data/local/shared_pref_key.dart';
+import '../local/pref/shared_pref_api.dart';
+import '/data/local/pref/shared_pref_impl.dart';
+import '/data/local/pref/shared_pref_key.dart';
 
 import '../search_repository.dart';
 

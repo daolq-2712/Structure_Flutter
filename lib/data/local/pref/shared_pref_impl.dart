@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../utils/generic_helper.dart';
+import '../../../utils/generic_helper.dart';
 import 'shared_pref_api.dart';
 
 class SharedPrefImpl implements SharedPrefApi {
