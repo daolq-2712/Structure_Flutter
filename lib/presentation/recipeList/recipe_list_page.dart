@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -15,20 +14,18 @@ class RecipeList extends StatefulWidget {
   const RecipeList({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
-  _RecipeListState createState() => _RecipeListState();
+  RecipeListState createState() => RecipeListState();
 }
 
-class _RecipeListState extends State<RecipeList> {
+class RecipeListState extends State<RecipeList> {
   static const String prefSearchKey = 'previousSearches';
 
   late TextEditingController searchTextController;
-  late ScrollController _scrollController;
+
   int currentCount = 0;
   int currentStartPosition = 0;
   int currentEndPosition = 20;
-  int pageCount = 20;
-  bool hasMore = false;
+
   bool loading = false;
   bool inErrorState = false;
   List<String> previousSearches = <String>[];
@@ -38,27 +35,14 @@ class _RecipeListState extends State<RecipeList> {
   @override
   void initState() {
     super.initState();
-    getPreviousSearches();
+    _getPreviousSearches();
     searchTextController = TextEditingController(text: '');
-    _scrollController = ScrollController();
-    _scrollController.addListener(() {
-      final triggerFetchMoreSize =
-          0.7 * _scrollController.position.maxScrollExtent;
+  }
 
-      if (_scrollController.position.pixels > triggerFetchMoreSize) {
-        if (hasMore &&
-            currentEndPosition < currentCount &&
-            !loading &&
-            !inErrorState) {
-          setState(() {
-            loading = true;
-            currentStartPosition = currentEndPosition;
-            currentEndPosition =
-                min(currentStartPosition + pageCount, currentCount);
-          });
-        }
-      }
-    });
+  @override
+  void dispose() {
+    searchTextController.dispose();
+    super.dispose();
   }
 
   Future<APIRecipeQuery> _getRecipeData(String query, int from, int to) async {
@@ -68,18 +52,7 @@ class _RecipeListState extends State<RecipeList> {
     return APIRecipeQuery.fromJson(recipeMap);
   }
 
-  @override
-  void dispose() {
-    searchTextController.dispose();
-    super.dispose();
-  }
-
-  void _savePreviousSearches() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setStringList(prefSearchKey, previousSearches);
-  }
-
-  void getPreviousSearches() async {
+  void _getPreviousSearches() async {
     final prefs = await SharedPreferences.getInstance();
     if (prefs.containsKey(prefSearchKey)) {
       final searches = prefs.getStringList(prefSearchKey);
@@ -135,6 +108,7 @@ class _RecipeListState extends State<RecipeList> {
                     autofocus: false,
                     textInputAction: TextInputAction.done,
                     onSubmitted: (value) {
+                      _startSearch(value);
                       if (!previousSearches.contains(value)) {
                         previousSearches.add(value);
                         _savePreviousSearches();
@@ -180,15 +154,18 @@ class _RecipeListState extends State<RecipeList> {
     setState(() {
       currentSearchList.clear();
       currentCount = 0;
-      currentEndPosition = pageCount;
       currentStartPosition = 0;
-      hasMore = true;
       value = value.trim();
       if (!previousSearches.contains(value)) {
         previousSearches.add(value);
         _savePreviousSearches();
       }
     });
+  }
+
+  void _savePreviousSearches() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setStringList(prefSearchKey, previousSearches);
   }
 
   Widget _buildRecipeLoader(BuildContext context) {
@@ -218,7 +195,6 @@ class _RecipeListState extends State<RecipeList> {
             inErrorState = false;
             if (query != null) {
               currentCount = query.count;
-              hasMore = query.more;
 
               currentSearchList.addAll(query.hits);
               // 8
@@ -246,7 +222,6 @@ class _RecipeListState extends State<RecipeList> {
     return Flexible(
       // 4
       child: GridView.builder(
-        controller: _scrollController,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: (itemWidth / itemHeight),
