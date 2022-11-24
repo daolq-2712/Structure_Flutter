@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:structureflutter/data/repository/search_repository_impl.dart';
+import 'package:structureflutter/data/search_repository.dart';
 
 import '/data/remote/model/recipe_model.dart';
 import '/data/remote/recipe_service_api.dart';
@@ -18,7 +19,7 @@ class RecipeList extends StatefulWidget {
 }
 
 class RecipeListState extends State<RecipeList> {
-  static const String prefSearchKey = 'previousSearches';
+  late SearchRepository _searchRepository;
 
   late TextEditingController searchTextController;
 
@@ -35,8 +36,14 @@ class RecipeListState extends State<RecipeList> {
   @override
   void initState() {
     super.initState();
-    _getPreviousSearches();
+    _initData();
+  }
+
+  void _initData() async {
     searchTextController = TextEditingController(text: '');
+    _searchRepository = await SearchRepositoryImpl.getInstance();
+
+    previousSearches = await _searchRepository.getSearchHistory();
   }
 
   @override
@@ -50,14 +57,6 @@ class RecipeListState extends State<RecipeList> {
     final recipeMap = json.decode(recipeJson);
 
     return APIRecipeQuery.fromJson(recipeMap);
-  }
-
-  void _getPreviousSearches() async {
-    final prefs = await SharedPreferences.getInstance();
-    if (prefs.containsKey(prefSearchKey)) {
-      final searches = prefs.getStringList(prefSearchKey);
-      previousSearches = searches ?? [];
-    }
   }
 
   @override
@@ -164,8 +163,7 @@ class RecipeListState extends State<RecipeList> {
   }
 
   void _savePreviousSearches() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setStringList(prefSearchKey, previousSearches);
+    _searchRepository.saveSearchHistory(previousSearches);
   }
 
   Widget _buildRecipeLoader(BuildContext context) {
