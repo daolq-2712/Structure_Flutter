@@ -1,128 +1,103 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '/utils/colors.dart';
-import 'myrecipes/my_recipes_list_page.dart';
-import 'recipeList/recipe_list_page.dart';
-import 'shopping/shopping_list_page.dart';
+import '../data/model/movie.dart';
+import '../utils/theme/colors.dart';
+import 'home/widget/category_view.dart';
+import 'home/widget/my_list_view.dart';
+import 'home/widget/popular_view.dart';
+import 'home/widget/slider_view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-  List<Widget> pageList = <Widget>[];
-
-  static const String prefSelectedIndexKey = 'selectedIndex';
 
   @override
   void initState() {
     super.initState();
-    pageList.add(const RecipeList());
-    pageList.add(const MyRecipesList());
-    pageList.add(const ShoppingList());
-    getCurrentIndex();
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    saveCurrentIndex();
-  }
-
-  void saveCurrentIndex() async {
-    // 1
-    final prefs = await SharedPreferences.getInstance();
-    // 2
-    prefs.setInt(prefSelectedIndexKey, _selectedIndex);
-  }
-
-  void getCurrentIndex() async {
-    // 1
-    final prefs = await SharedPreferences.getInstance();
-    // 2
-    if (prefs.containsKey(prefSelectedIndexKey)) {
-// 3
-      setState(() {
-        final index = prefs.getInt(prefSelectedIndexKey);
-        if (index != null) {
-          _selectedIndex = index;
-        }
-      });
-    }
   }
 
   @override
   Widget build(BuildContext context) {
-    String title;
-    switch (_selectedIndex) {
-      case 0:
-        title = 'Recipes';
-        break;
-      case 1:
-        title = 'Bookmarks';
-        break;
-      case 2:
-        title = 'Groceries';
-        break;
-      default:
-        title = 'Recipes';
-        break;
-    }
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/images/icon_recipe.svg',
-                  color: _selectedIndex == 0 ? green : Colors.grey,
-                  semanticsLabel: 'Recipes'),
-              label: 'Recipes'),
-          BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/images/icon_bookmarks.svg',
-                  color: _selectedIndex == 1 ? green : Colors.grey,
-                  semanticsLabel: 'Bookmarks'),
-              label: 'Bookmarks'),
-          BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/images/icon_shopping_list.svg',
-                  color: _selectedIndex == 2 ? green : Colors.grey,
-                  semanticsLabel: 'Groceries'),
-              label: 'Groceries'),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: green,
-        onTap: _onItemTapped,
-      ),
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        systemOverlayStyle: const SystemUiOverlayStyle(
-          systemNavigationBarColor: Colors.white,
-          statusBarColor: Colors.white,
-          statusBarBrightness: Brightness.light,
-          statusBarIconBrightness: Brightness.dark,
-          systemNavigationBarDividerColor: Colors.white,
-          //Navigation bar divider color
-          systemNavigationBarIconBrightness:
-              Brightness.light, //navigation bar icon
+        titleSpacing: 4.0,
+        backgroundColor: primaryColor,
+        title: Image.asset(
+          'assets/images/ic_netflix.png',
+          height: 56.0,
+          fit: BoxFit.fitHeight,
         ),
-        title: Text(
-          title,
-          style: const TextStyle(
-              fontSize: 20, fontWeight: FontWeight.w500, color: Colors.black),
-        ),
+        centerTitle: true,
+        actions: [
+          Container(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: IconButton(
+              icon: const Icon(Icons.search, color: actionBarIconColor),
+              onPressed: () {},
+            ),
+          ),
+        ],
+        elevation: 0.0,
       ),
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: pageList,
-      ),
+      backgroundColor: backgroundColor,
+      body: _createBody(context),
     );
+  }
+
+  Widget _createBody(BuildContext context) {
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints viewportConstraints) {
+        return SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints:
+            BoxConstraints(minHeight: viewportConstraints.maxHeight),
+            child: Container(
+              child: Column(
+                children: [
+                  SliderView(
+                    actionOpenMovie: (movie) {
+                      _openMovieDetail(movie);
+                    },
+                  ),
+                  Divider(height: 4.0, color: Colors.transparent),
+                  CategoryView(
+                    actionOpenCategory: (movie) {
+                      _openMovieDetail(movie);
+                    },
+                  ),
+                  Divider(height: 8.0, color: Colors.transparent),
+                  MyListView(
+                    actionOpenMovie: (movie) {
+                      _openMovieDetail(movie);
+                    },
+                    actionLoadAll: () {},
+                  ),
+                  Divider(height: 8.0, color: Colors.transparent),
+                  PopularView(
+                    actionOpenMovie: (movie) {
+                      _openMovieDetail(movie);
+                    },
+                    actionLoadAll: () {},
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _openMovieDetail(Movie movie) async {
+    // await Navigator.of(context).push(
+    //   MaterialPageRoute(builder: (_) {
+    //     return DetailScreen(movie: movie);
+    //   }),
+    // );
   }
 }
