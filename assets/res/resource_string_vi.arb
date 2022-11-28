@@ -1,0 +1,42 @@
+{
+  "helloWorld": "Xin chào!",
+  "@helloWorld": {
+    "description": "Lời chào của lập trình viên mới bắt đầu!"
+  },
+  "appName": "Phim",
+  "@appName": {
+    "description": "Phim"
+  },
+  "Retry": "Thử lại",
+  "@Retry": {
+      "description": "Thử lại"
+  },
+  "popular": "Phổ biến trên Netflix",
+  "@popular": {
+    "description": "Phim phổ biến"
+  },
+  "myList": "Thịnh hành",
+  "@myList": {
+    "description": "Phim thịnh hành"
+  },
+  "year": "Year",
+  "@year": {
+    "description": "Year title"
+  },
+  "country": "Country",
+  "@country": {
+    "description": "Country title"
+  },
+  "cannotSupport": "Cannot support",
+  "@cannotSupport": {
+    "description": "Cannot support message"
+  },
+  "length": "Length",
+  "@length": {
+    "description": "Length title"
+  },
+  "screenshot": "Ảnh màn hình",
+  "@screenshot": {
+    "description": "tên ảnh màn hình"
+  }
+}
