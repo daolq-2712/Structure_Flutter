@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-import '/business/movie_bloc/movie_bloc.dart';
-import '/business/movie_bloc/movie_state.dart';
+import '/business/movies_bloc/movies_bloc.dart';
+import '/business/movies_bloc/movies_state.dart';
 import '/data/repository/movie_repository_impl.dart';
 import '/utils/constant.dart';
 
@@ -15,21 +15,21 @@ class TrendingSliderView extends StatefulWidget {
 }
 
 class _TrendingSliderViewState extends State<TrendingSliderView> {
-  late MovieBloc _movieBloc;
+  late MoviesBloc _moviesBloc;
 
   @override
   void initState() {
     super.initState();
-    _movieBloc = MovieBloc(MovieRepositoryImpl());
+    _moviesBloc = MoviesBloc(MovieRepositoryImpl());
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _movieBloc.fetchMovieNowPlaying();
+      _moviesBloc.fetchMovieNowPlaying();
     });
   }
 
   @override
   void dispose() {
-    _movieBloc.dispose();
+    _moviesBloc.dispose();
     super.dispose();
   }
 
@@ -37,14 +37,15 @@ class _TrendingSliderViewState extends State<TrendingSliderView> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
 
-    return StreamBuilder<MovieState>(
-      stream: _movieBloc.stateController.stream,
-      initialData: MovieStateInit(),
-      builder: (BuildContext context, AsyncSnapshot<MovieState> snapshot) {
+    return StreamBuilder<FetchMoviesState>(
+      stream: _moviesBloc.stateController.stream,
+      initialData: FetchMoviesStateInitialized(),
+      builder:
+          (BuildContext context, AsyncSnapshot<FetchMoviesState> snapshot) {
         var state = snapshot.data;
-        if (state is MovieStateInit) {
+        if (state is FetchMoviesStateLoading) {
           return const Center(child: CircularProgressIndicator());
-        } else if (state is MovieFetched) {
+        } else if (state is FetchMoviesSuccess) {
           final movies = state.movies;
           return CarouselSlider.builder(
             itemCount: movies.length,
