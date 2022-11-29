@@ -2,10 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-import 'package:structureflutter/business/movie_bloc/movie_bloc.dart';
-import 'package:structureflutter/business/movie_bloc/movie_state.dart';
-import 'package:structureflutter/data/repository/movie_repository_impl.dart';
-import 'package:structureflutter/utils/constant.dart';
+import '/business/movie_bloc/movie_bloc.dart';
+import '/business/movie_bloc/movie_state.dart';
+import '/data/repository/movie_repository_impl.dart';
+import '/utils/constant.dart';
 
 class TrendingSliderView extends StatefulWidget {
   const TrendingSliderView({Key? key}) : super(key: key);
@@ -51,14 +51,21 @@ class _TrendingSliderViewState extends State<TrendingSliderView> {
             itemBuilder: (context, index, realIndex) {
               final movie = movies[index];
 
-              return CachedNetworkImage(
-                placeholder: (context, url) => const Center(
-                  child: CircularProgressIndicator(),
+              return Card(
+                elevation: 10.0,
+                borderOnForeground: true,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
                 ),
-                imageUrl: '${Constant.prefixImageUrl}${movie.backdropPath}',
-                width: width,
-                height: double.infinity,
-                fit: BoxFit.cover,
+                child: CachedNetworkImage(
+                  placeholder: (context, url) => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  imageUrl: '${Constant.prefixImageUrl}${movie.backdropPath}',
+                  width: width,
+                  height: double.infinity,
+                  fit: BoxFit.cover,
+                ),
               );
             },
             options: CarouselOptions(
