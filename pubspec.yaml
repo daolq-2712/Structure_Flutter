@@ -21,13 +21,14 @@ dependencies:
     sdk: flutter
   intl: ^0.17.0
 
-  cached_network_image: ^3.1.0
-  flutter_svg: ^0.22.0
   shared_preferences: ^2.0.7
   json_annotation: ^4.7.0
   http: ^0.13.3
 
-  cupertino_icons: ^1.0.2
+  cached_network_image: ^3.1.0
+  flutter_svg: ^0.22.0
+  carousel_slider: ^4.1.1
+
 
 dev_dependencies:
   flutter_test:
@@ -52,3 +53,17 @@ flutter:
   assets:
     - assets/
     - assets/images/
+
+  fonts:
+    - family: HelveticaNeue
+      fonts:
+        - asset: assets/fonts/HelveticaNeue-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/HelveticaNeue-Light.ttf
+          weight: 300
+        - asset: assets/fonts/HelveticaNeue-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/HelveticaNeue-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/HelveticaNeue-Black.ttf
+          weight: 900

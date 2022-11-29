@@ -15,9 +15,9 @@ class MovieResponse extends Equatable {
     if (result == null) return const MovieResponse();
     return MovieResponse(
       page: result['page'],
-      movies: (result['results'].asOrNull(List))
+      movies: (result['results'] as List?)
           ?.map((e) => Movie.parserFromJson(e))
-          ?.toList(),
+          .toList(),
       totalPages: result['total_pages'],
       totalResult: result['total_results'],
     );

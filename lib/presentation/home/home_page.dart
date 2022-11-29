@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:structureflutter/presentation/home/widget/trending_slider_view.dart';
 
-import '../data/model/movie.dart';
-import '../utils/theme/colors.dart';
+import '../../data/model/movie.dart';
+import '../../utils/theme/colors.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -51,10 +52,10 @@ class _HomePageState extends State<HomePage> {
           child: ConstrainedBox(
             constraints:
                 BoxConstraints(minHeight: viewportConstraints.maxHeight),
-            child: Container(
-              child: Column(
-                children: [],
-              ),
+            child: Column(
+              children: const [
+                 TrendingSliderView(),
+              ],
             ),
           ),
         );

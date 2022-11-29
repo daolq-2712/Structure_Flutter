@@ -1,12 +1,11 @@
 import 'dart:convert';
-import 'dart:html';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 
 class MovieServiceClient {
-  static const apiKey = '74a16ff11a1af0351e925e85db72a2cf';
+  static const apiKey = 'd61431a2fb64b6e56c6f086952e63ab6';
   static const apiUrl = 'https://api.themoviedb.org/3/movie/';
 
   static final MovieServiceClient instance = MovieServiceClient._();
