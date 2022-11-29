@@ -7,8 +7,8 @@
   "@appName": {
     "description": "Phim"
   },
-  "Retry": "Thử lại",
-  "@Retry": {
+  "retry": "Thử lại",
+  "@retry": {
       "description": "Thử lại"
   },
   "popular": "Phổ biến trên Netflix",

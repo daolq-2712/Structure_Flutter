@@ -7,8 +7,8 @@
   "@appName": {
     "description": "Netflix"
   },
-  "Retry": "Retry",
-  "@Retry": {
+  "retry": "Retry",
+  "@retry": {
       "description": "Retry"
     },
   "popular": "Popular on Netflix",

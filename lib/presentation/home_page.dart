@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../data/model/movie.dart';
 import '../utils/theme/colors.dart';
-import 'home/widget/category_view.dart';
-import 'home/widget/my_list_view.dart';
-import 'home/widget/popular_view.dart';
-import 'home/widget/slider_view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,7 +11,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   void initState() {
     super.initState();
@@ -55,36 +50,10 @@ class _HomePageState extends State<HomePage> {
         return SingleChildScrollView(
           child: ConstrainedBox(
             constraints:
-            BoxConstraints(minHeight: viewportConstraints.maxHeight),
+                BoxConstraints(minHeight: viewportConstraints.maxHeight),
             child: Container(
               child: Column(
-                children: [
-                  SliderView(
-                    actionOpenMovie: (movie) {
-                      _openMovieDetail(movie);
-                    },
-                  ),
-                  Divider(height: 4.0, color: Colors.transparent),
-                  CategoryView(
-                    actionOpenCategory: (movie) {
-                      _openMovieDetail(movie);
-                    },
-                  ),
-                  Divider(height: 8.0, color: Colors.transparent),
-                  MyListView(
-                    actionOpenMovie: (movie) {
-                      _openMovieDetail(movie);
-                    },
-                    actionLoadAll: () {},
-                  ),
-                  Divider(height: 8.0, color: Colors.transparent),
-                  PopularView(
-                    actionOpenMovie: (movie) {
-                      _openMovieDetail(movie);
-                    },
-                    actionLoadAll: () {},
-                  ),
-                ],
+                children: [],
               ),
             ),
           ),
