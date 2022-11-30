@@ -1,6 +1,6 @@
 import 'package:connectivity/connectivity.dart';
 
-import '../../data/constant/constant.dart';
+import '../../data/movie_type.dart';
 import '../../data/movie_repository.dart';
 import '../base_bloc.dart';
 import 'movies_event.dart';
@@ -34,19 +34,7 @@ class MoviesBloc extends BaseBloc<FetchMoviesEvent, FetchMoviesState> {
     });
   }
 
-  void fetchMovieNowPlaying() {
-    eventController.sink.add(FetchMoviesWithType(Constant.nowPlaying));
-  }
-
-  void fetchMovieUpComing() {
-    eventController.sink.add(FetchMoviesWithType(Constant.upcoming));
-  }
-
-  void fetchMovieTopRate() {
-    eventController.sink.add(FetchMoviesWithType(Constant.topRated));
-  }
-
-  void fetchMoviePopular() {
-    eventController.sink.add(FetchMoviesWithType(Constant.popular));
+  void fetchMoviesByType(MovieType movieType) {
+    eventController.sink.add(FetchMoviesWithType(movieType.value));
   }
 }

@@ -1,20 +1,21 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:structureflutter/data/movie_type.dart';
 
 import '/business/movies_bloc/movies_bloc.dart';
 import '/business/movies_bloc/movies_state.dart';
 import '/data/repository/movie_repository_impl.dart';
 import '/utils/constant.dart';
 
-class TrendingSliderView extends StatefulWidget {
-  const TrendingSliderView({Key? key}) : super(key: key);
+class NowPlayingSliderView extends StatefulWidget {
+  const NowPlayingSliderView({Key? key}) : super(key: key);
 
   @override
-  State<TrendingSliderView> createState() => _TrendingSliderViewState();
+  State<NowPlayingSliderView> createState() => _NowPlayingSliderViewState();
 }
 
-class _TrendingSliderViewState extends State<TrendingSliderView> {
+class _NowPlayingSliderViewState extends State<NowPlayingSliderView> {
   late MoviesBloc _moviesBloc;
 
   @override
@@ -23,7 +24,7 @@ class _TrendingSliderViewState extends State<TrendingSliderView> {
     _moviesBloc = MoviesBloc(MovieRepositoryImpl());
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _moviesBloc.fetchMovieNowPlaying();
+      _moviesBloc.fetchMoviesByType(MovieType.nowPlaying);
     });
   }
 
@@ -77,7 +78,7 @@ class _TrendingSliderViewState extends State<TrendingSliderView> {
             ),
           );
         } else {
-          return const Spacer();
+          return Container();
         }
       },
     );

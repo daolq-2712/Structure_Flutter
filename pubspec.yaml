@@ -25,7 +25,7 @@ dependencies:
   json_annotation: ^4.7.0
   http: ^0.13.3
 
-  cached_network_image: ^3.1.0
+  cached_network_image: ^3.2.3
   flutter_svg: ^0.22.0
   carousel_slider: ^4.1.1
 

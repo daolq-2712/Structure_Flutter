@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:structureflutter/presentation/home/widget/trending_slider_view.dart';
+import 'package:structureflutter/presentation/home/widget/now_playing_slider_view.dart';
 
 import '../../data/model/movie.dart';
 import '../../utils/theme/colors.dart';
@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                 BoxConstraints(minHeight: viewportConstraints.maxHeight),
             child: Column(
               children: const [
-                 TrendingSliderView(),
+                 NowPlayingSliderView(),
               ],
             ),
           ),
