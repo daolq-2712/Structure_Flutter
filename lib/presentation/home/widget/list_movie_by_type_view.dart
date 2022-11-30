@@ -12,8 +12,10 @@ import '/utils/constant.dart';
 
 class ListMovieByTypeView extends StatefulWidget {
   final MovieType movieType;
+  final Function(MovieType) actionSeeAll;
 
-  const ListMovieByTypeView({Key? key, required this.movieType})
+  const ListMovieByTypeView(
+      {Key? key, required this.movieType, required this.actionSeeAll})
       : super(key: key);
 
   @override
@@ -83,7 +85,9 @@ class _ListMovieByTypeViewState extends State<ListMovieByTypeView> {
             ),
             IconButton(
               icon: const Icon(Icons.arrow_forward, color: groupTitleColor),
-              onPressed: () {},
+              onPressed: () {
+                widget.actionSeeAll(widget.movieType);
+              },
             )
           ],
         ),
@@ -92,7 +96,7 @@ class _ListMovieByTypeViewState extends State<ListMovieByTypeView> {
           child: ListView.separated(
             itemBuilder: (BuildContext context, int index) {
               Movie movie = movies[index];
-              return _createMyListItem(context, movie);
+              return _createListItem(context, movie);
             },
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             scrollDirection: Axis.horizontal,
@@ -107,7 +111,7 @@ class _ListMovieByTypeViewState extends State<ListMovieByTypeView> {
     );
   }
 
-  Widget _createMyListItem(BuildContext context, Movie movie) {
+  Widget _createListItem(BuildContext context, Movie movie) {
     final width = MediaQuery.of(context).size.width / 2.6;
     return Container(
       width: width,

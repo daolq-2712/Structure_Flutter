@@ -12,9 +12,9 @@ class MovieRepositoryImpl extends MovieRepository {
       : _client = client ?? MovieServiceClient.instance;
 
   @override
-  Future<List<Movie>> fetchMovies(String type) async {
+  Future<List<Movie>> fetchMovies(String type, {int page = 1}) async {
     final json = await _client.getJsonFromUrl(
-        '${MovieServiceClient.apiUrl}$type?api_key=${MovieServiceClient.apiKey}');
+        '${MovieServiceClient.apiUrl}$type?api_key=${MovieServiceClient.apiKey}&page=$page');
     return MovieResponse.parserFromJson(json).movies ?? List.empty();
   }
 

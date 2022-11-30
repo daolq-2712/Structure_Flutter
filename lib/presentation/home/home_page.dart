@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:structureflutter/data/movie_type.dart';
 import 'package:structureflutter/presentation/home/widget/list_movie_by_type_view.dart';
 import 'package:structureflutter/presentation/home/widget/now_playing_slider_view.dart';
+import 'package:structureflutter/presentation/list_movie/list_movie.dart';
 
-import '../../data/model/movie.dart';
 import '../../utils/theme/colors.dart';
 
 class HomePage extends StatefulWidget {
@@ -55,12 +55,27 @@ class _HomePageState extends State<HomePage> {
             constraints:
                 BoxConstraints(minHeight: viewportConstraints.maxHeight),
             child: Column(
-              children: const [
-                NowPlayingSliderView(),
-                Divider(height: 8.0, color: Colors.transparent),
-                ListMovieByTypeView(movieType: MovieType.popular),
-                ListMovieByTypeView(movieType: MovieType.topRated),
-                ListMovieByTypeView(movieType: MovieType.upcoming),
+              children: [
+                const NowPlayingSliderView(),
+                const Divider(height: 8.0, color: Colors.transparent),
+                ListMovieByTypeView(
+                  movieType: MovieType.popular,
+                  actionSeeAll: (movieType) {
+                    _openListMovie(movieType);
+                  },
+                ),
+                ListMovieByTypeView(
+                  movieType: MovieType.topRated,
+                  actionSeeAll: (movieType) {
+                    _openListMovie(movieType);
+                  },
+                ),
+                ListMovieByTypeView(
+                  movieType: MovieType.upcoming,
+                  actionSeeAll: (movieType) {
+                    _openListMovie(movieType);
+                  },
+                ),
               ],
             ),
           ),
@@ -69,11 +84,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _openMovieDetail(Movie movie) async {
-    // await Navigator.of(context).push(
-    //   MaterialPageRoute(builder: (_) {
-    //     return DetailScreen(movie: movie);
-    //   }),
-    // );
+  void _openListMovie(MovieType movieType) async {
+    await Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) {
+        return ListMovie(movieType: movieType);
+      }),
+    );
   }
 }

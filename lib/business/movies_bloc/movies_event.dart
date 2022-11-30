@@ -10,3 +10,13 @@ class FetchMoviesWithType extends FetchMoviesEvent {
   @override
   List<Object> get props => [type];
 }
+
+class FetchMoreMoviesWithType extends FetchMoviesEvent {
+  final String type;
+  final int page;
+
+  FetchMoreMoviesWithType(this.type, {this.page = 1});
+
+  @override
+  List<Object> get props => [type, page];
+}

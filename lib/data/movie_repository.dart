@@ -1,10 +1,9 @@
-
 import 'model/movie.dart';
 import 'model/movie_image.dart';
 import 'model/movie_info.dart';
 
 abstract class MovieRepository {
-  Future<List<Movie>> fetchMovies(String type);
+  Future<List<Movie>> fetchMovies(String type, {int page});
 
   Future<MovieInfo> getMovieInfo(int movieId);
 
