@@ -11,13 +11,21 @@
   "@retry": {
       "description": "Retry"
     },
-  "popular": "Popular on Netflix",
+  "popular": "Popular",
   "@popular": {
     "description": "Popular title"
   },
-  "myList": "My List",
-  "@myList": {
-    "description": "My list title"
+  "nowPlaying": "Now Playing",
+  "@topRate": {
+    "description": "Now Playing"
+  },
+  "topRate": "Top Rate",
+  "@topRate": {
+    "description": "Top Rate"
+  },
+  "upComing": "Up Coming",
+  "@topRate": {
+    "description": "Up Coming"
   },
   "year": "Year",
   "@year": {

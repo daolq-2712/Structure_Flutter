@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/resource_string.dart';
 
 class ErrorPage extends StatelessWidget {
   final String message;
@@ -23,8 +24,8 @@ class ErrorPage extends StatelessWidget {
           ),
           OutlinedButton(
             onPressed: () => retry,
-            child: const Text(
-              'Retry',
+            child: Text(
+              AppLocalizations.of(context)?.retry ?? 'Retry',
             ),
           ),
         ],

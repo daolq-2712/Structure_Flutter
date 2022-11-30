@@ -11,13 +11,21 @@
   "@retry": {
       "description": "Thử lại"
   },
-  "popular": "Phổ biến trên Netflix",
+  "nowPlaying": "Đang chiếu",
+  "@topRate": {
+    "description": "Đang chiếu"
+  },
+  "popular": "Phổ biến",
   "@popular": {
     "description": "Phim phổ biến"
   },
-  "myList": "Thịnh hành",
-  "@myList": {
-    "description": "Phim thịnh hành"
+  "topRate": "Top Rate",
+  "@topRate": {
+    "description": "Top Rate"
+  },
+  "upComing": "Up Coming",
+  "@topRate": {
+    "description": "Up Coming"
   },
   "year": "Year",
   "@year": {

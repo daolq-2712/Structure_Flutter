@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:structureflutter/data/movie_type.dart';
+import 'package:structureflutter/presentation/home/widget/list_movie_by_type_view.dart';
 import 'package:structureflutter/presentation/home/widget/now_playing_slider_view.dart';
 
 import '../../data/model/movie.dart';
@@ -54,7 +56,11 @@ class _HomePageState extends State<HomePage> {
                 BoxConstraints(minHeight: viewportConstraints.maxHeight),
             child: Column(
               children: const [
-                 NowPlayingSliderView(),
+                NowPlayingSliderView(),
+                Divider(height: 8.0, color: Colors.transparent),
+                ListMovieByTypeView(movieType: MovieType.popular),
+                ListMovieByTypeView(movieType: MovieType.topRated),
+                ListMovieByTypeView(movieType: MovieType.upcoming),
               ],
             ),
           ),
