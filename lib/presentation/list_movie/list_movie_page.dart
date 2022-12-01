@@ -1,24 +1,24 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:structureflutter/business/movies_bloc/movies_bloc.dart';
-import 'package:structureflutter/data/model/movie.dart';
-import 'package:structureflutter/data/movie_type.dart';
-import 'package:structureflutter/data/repository/movie_repository_impl.dart';
 
-import '../../business/movies_bloc/movies_state.dart';
-import '../../utils/constant.dart';
+import '/business/movies_bloc/movies_bloc.dart';
+import '/data/model/movie.dart';
+import '/data/movie_type.dart';
+import '/data/repository/movie_repository_impl.dart';
+import '/business/movies_bloc/movies_state.dart';
+import '/utils/constant.dart';
 import '../widget/error_page.dart';
 
-class ListMovie extends StatefulWidget {
+class ListMoviePage extends StatefulWidget {
   final MovieType movieType;
 
-  const ListMovie({Key? key, required this.movieType}) : super(key: key);
+  const ListMoviePage({Key? key, required this.movieType}) : super(key: key);
 
   @override
-  State<ListMovie> createState() => _ListMovieState();
+  State<ListMoviePage> createState() => _ListMoviePageState();
 }
 
-class _ListMovieState extends State<ListMovie> {
+class _ListMoviePageState extends State<ListMoviePage> {
   late MoviesBloc _moviesBloc;
 
   int page = 1;

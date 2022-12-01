@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:structureflutter/data/movie_type.dart';
-import 'package:structureflutter/presentation/home/widget/list_movie_by_type_view.dart';
-import 'package:structureflutter/presentation/home/widget/now_playing_slider_view.dart';
-import 'package:structureflutter/presentation/list_movie/list_movie.dart';
 
-import '../../utils/theme/colors.dart';
+import '../../data/model/movie.dart';
+import '../movie_detail/movie_detail_page.dart';
+import '/data/movie_type.dart';
+import '/presentation/home/component/list_movie_by_type_view.dart';
+import '/presentation/home/component/now_playing_slider_view.dart';
+import '/presentation/list_movie/list_movie_page.dart';
+import '/utils/theme/colors.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -56,12 +58,19 @@ class _HomePageState extends State<HomePage> {
                 BoxConstraints(minHeight: viewportConstraints.maxHeight),
             child: Column(
               children: [
-                const NowPlayingSliderView(),
+                NowPlayingSliderView(
+                  actionviewDetail: (movie) {
+                    _openMovieDetail(movie);
+                  },
+                ),
                 const Divider(height: 8.0, color: Colors.transparent),
                 ListMovieByTypeView(
                   movieType: MovieType.popular,
                   actionSeeAll: (movieType) {
                     _openListMovie(movieType);
+                  },
+                  actionviewDetail: (movie) {
+                    _openMovieDetail(movie);
                   },
                 ),
                 ListMovieByTypeView(
@@ -69,11 +78,17 @@ class _HomePageState extends State<HomePage> {
                   actionSeeAll: (movieType) {
                     _openListMovie(movieType);
                   },
+                  actionviewDetail: (movie) {
+                    _openMovieDetail(movie);
+                  },
                 ),
                 ListMovieByTypeView(
                   movieType: MovieType.upcoming,
                   actionSeeAll: (movieType) {
                     _openListMovie(movieType);
+                  },
+                  actionviewDetail: (movie) {
+                    _openMovieDetail(movie);
                   },
                 ),
               ],
@@ -87,7 +102,15 @@ class _HomePageState extends State<HomePage> {
   void _openListMovie(MovieType movieType) async {
     await Navigator.of(context).push(
       MaterialPageRoute(builder: (_) {
-        return ListMovie(movieType: movieType);
+        return ListMoviePage(movieType: movieType);
+      }),
+    );
+  }
+
+  void _openMovieDetail(Movie movie) async {
+    await Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) {
+        return DetailScreen(movie: movie);
       }),
     );
   }

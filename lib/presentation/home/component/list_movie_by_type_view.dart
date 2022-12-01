@@ -13,10 +13,14 @@ import '/utils/constant.dart';
 class ListMovieByTypeView extends StatefulWidget {
   final MovieType movieType;
   final Function(MovieType) actionSeeAll;
+  final Function(Movie) actionviewDetail;
 
-  const ListMovieByTypeView(
-      {Key? key, required this.movieType, required this.actionSeeAll})
-      : super(key: key);
+  const ListMovieByTypeView({
+    Key? key,
+    required this.movieType,
+    required this.actionSeeAll,
+    required this.actionviewDetail,
+  }) : super(key: key);
 
   @override
   State<ListMovieByTypeView> createState() => _ListMovieByTypeViewState();
@@ -113,29 +117,32 @@ class _ListMovieByTypeViewState extends State<ListMovieByTypeView> {
 
   Widget _createListItem(BuildContext context, Movie movie) {
     final width = MediaQuery.of(context).size.width / 2.6;
-    return Container(
-      width: width,
-      height: double.infinity,
-      padding: const EdgeInsets.only(bottom: 20.0),
-      child: Card(
-        elevation: 10.0,
-        borderOnForeground: true,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-        child: SizedBox(
-          width: width,
-          height: double.infinity,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(8.0),
-            child: CachedNetworkImage(
-              placeholder: (context, url) => const Center(
-                child: CircularProgressIndicator(),
+    return InkWell(
+      onTap: () => widget.actionviewDetail(movie),
+      child: Container(
+        width: width,
+        height: double.infinity,
+        padding: const EdgeInsets.only(bottom: 20.0),
+        child: Card(
+          elevation: 10.0,
+          borderOnForeground: true,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0),
+          ),
+          child: SizedBox(
+            width: width,
+            height: double.infinity,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: CachedNetworkImage(
+                placeholder: (context, url) => const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                imageUrl: '${Constant.prefixImageUrl}${movie.posterPath}',
+                width: width,
+                height: double.infinity,
+                fit: BoxFit.cover,
               ),
-              imageUrl: '${Constant.prefixImageUrl}${movie.posterPath}',
-              width: width,
-              height: double.infinity,
-              fit: BoxFit.cover,
             ),
           ),
         ),
