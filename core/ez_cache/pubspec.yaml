@@ -11,6 +11,11 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # Hive is a lightweight and blazing fast key-value database written in pure Dart
+  hive: ^2.2.3
+  # Support all platform: Android - iOS - macOS - Window
+  hive_flutter: ^1.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

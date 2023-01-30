@@ -1,7 +1,7 @@
 library ez_cache;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'package:hive/hive.dart';
+export 'package:hive_flutter/hive_flutter.dart';
+
+export 'src/cache.dart';
+export 'src/hive/hive_cache.dart';
