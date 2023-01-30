@@ -862,4 +862,3 @@ linter:
     # reason: Trying to assigning a value to void is an error.
     # 0 issues
     - void_checks
-
