@@ -5,6 +5,7 @@ import 'colors.dart';
 final ThemeData defaultTheme = ThemeData(
   primarySwatch: Colors.blue,
   scaffoldBackgroundColor: backgroundColor,
+  fontFamily: 'HelveticaNeue',
   appBarTheme: const AppBarTheme(
     color: backgroundColor,
     iconTheme: IconThemeData(color: accentLightColor),

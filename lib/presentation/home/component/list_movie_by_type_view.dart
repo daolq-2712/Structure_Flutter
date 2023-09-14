@@ -82,7 +82,6 @@ class _ListMovieByTypeViewState extends State<ListMovieByTypeView> {
                   style: const TextStyle(
                       color: groupTitleColor,
                       fontSize: 16,
-                      fontFamily: 'HelveticaNeue',
                       fontWeight: FontWeight.bold),
                 ),
               ),

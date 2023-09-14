@@ -76,7 +76,6 @@ class _MovieInfoViewState extends State<MovieInfoView> {
               fontWeight: FontWeight.bold,
               fontSize: 20.0,
               color: Colors.black87,
-              fontFamily: 'HelveticaNeue',
             ),
           ),
         ),
@@ -90,7 +89,6 @@ class _MovieInfoViewState extends State<MovieInfoView> {
             style: const TextStyle(
               fontSize: 13.0,
               color: Colors.black45,
-              fontFamily: 'HelveticaNeue',
             ),
           ),
         ),
@@ -117,7 +115,6 @@ class _MovieInfoViewState extends State<MovieInfoView> {
                     style: const TextStyle(
                       fontSize: 13.0,
                       color: Colors.black45,
-                      fontFamily: 'HelveticaNeue',
                     ),
                   ),
                   Text(
@@ -126,7 +123,6 @@ class _MovieInfoViewState extends State<MovieInfoView> {
                       fontSize: 18.0,
                       color: Colors.black87,
                       fontWeight: FontWeight.bold,
-                      fontFamily: 'HelveticaNeue',
                     ),
                   )
                 ],
@@ -138,7 +134,6 @@ class _MovieInfoViewState extends State<MovieInfoView> {
                     style: const TextStyle(
                       fontSize: 13.0,
                       color: Colors.black45,
-                      fontFamily: 'HelveticaNeue',
                     ),
                   ),
                   Text(
@@ -147,7 +142,6 @@ class _MovieInfoViewState extends State<MovieInfoView> {
                       fontSize: 18.0,
                       color: Colors.black87,
                       fontWeight: FontWeight.bold,
-                      fontFamily: 'HelveticaNeue',
                     ),
                   )
                 ],
@@ -159,7 +153,6 @@ class _MovieInfoViewState extends State<MovieInfoView> {
                     style: const TextStyle(
                       fontSize: 13.0,
                       color: Colors.black45,
-                      fontFamily: 'HelveticaNeue',
                     ),
                   ),
                   Text(
@@ -168,7 +161,6 @@ class _MovieInfoViewState extends State<MovieInfoView> {
                       fontSize: 18.0,
                       color: Colors.black87,
                       fontWeight: FontWeight.bold,
-                      fontFamily: 'HelveticaNeue',
                     ),
                   )
                 ],
@@ -200,7 +192,6 @@ class _MovieInfoViewState extends State<MovieInfoView> {
               style: const TextStyle(
                 fontSize: 14.0,
                 color: Colors.black45,
-                fontFamily: 'HelveticaNeue',
               ),
             );
           },

@@ -153,7 +153,6 @@ class _ListMoviePageState extends State<ListMoviePage> {
                   style: const TextStyle(
                       color: Colors.white,
                       fontSize: 24,
-                      fontFamily: 'HelveticaNeue',
                       fontWeight: FontWeight.bold),
                 ),
               )
