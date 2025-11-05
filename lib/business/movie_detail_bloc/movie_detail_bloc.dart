@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 import '/business/base_bloc.dart';
@@ -9,26 +11,34 @@ class MovieDetailBloc extends BaseBloc<GetMovieDetailEvent, MovieDetailState> {
   final MovieRepository movieRepository;
   Connectivity connectivity = Connectivity();
 
+  late final StreamSubscription<GetMovieDetailEvent> _eventSubscription;
+
   MovieDetailBloc(this.movieRepository) : super(MovieDetailInit()) {
-    eventController.stream.listen((GetMovieDetailEvent event) async {
-      try {
-        final info = await movieRepository.getMovieInfo(event.movieId);
-        state = GetMovieDetailSuccess(info);
-      } on Exception catch (e) {
-        state = GetMovieDetailError(e.toString());
-      }
-
+    _eventSubscription = eventController.stream.listen((GetMovieDetailEvent event) async {
       final connectResult = await connectivity.checkConnectivity();
-      if (connectResult == ConnectivityResult.none) {
-        state = GetMovieDetailError('Please check the network connection');
+      if (!connectResult.contains(ConnectivityResult.none)) {
+        try {
+          final info = await movieRepository.getMovieInfo(event.movieId);
+          state = GetMovieDetailSuccess(info);
+        } catch (e) {
+          state = GetMovieDetailError(e.toString());
+        }
       }
 
-      // add state mới vào stateController để bên UI nhận được
+      // Add new state to stateController so UI can receive it
       stateController.sink.add(state);
     });
   }
 
   void fetchMovieDetail(int movieId) {
     eventController.sink.add(GetMovieDetailEvent(movieId));
+  }
+
+  @override
+  void dispose() {
+    _eventSubscription.cancel();
+    eventController.close();
+    stateController.close();
+    super.dispose();
   }
 }

@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:structureflutter/utils/constant.dart';
 
 import '/data/model/movie.dart';
 import '/presentation/movie_detail/component/movie_info_view.dart';
 import '/presentation/widget/favorite_icon_widget.dart';
+import '/utils/constant.dart';
 
 class DetailScreen extends StatelessWidget {
   final Movie movie;

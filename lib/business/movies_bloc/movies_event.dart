@@ -1,9 +1,11 @@
 import 'package:equatable/equatable.dart';
 
+import '/data/movie_type.dart';
+
 abstract class FetchMoviesEvent extends Equatable {}
 
 class FetchMoviesWithType extends FetchMoviesEvent {
-  final String type;
+  final MovieType type;
 
   FetchMoviesWithType(this.type);
 
@@ -12,7 +14,7 @@ class FetchMoviesWithType extends FetchMoviesEvent {
 }
 
 class FetchMoreMoviesWithType extends FetchMoviesEvent {
-  final String type;
+  final MovieType type;
   final int page;
 
   FetchMoreMoviesWithType(this.type, {this.page = 1});
