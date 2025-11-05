@@ -18,7 +18,7 @@ import 'resource_string_vi.dart';
 /// `supportedLocales` list. For example:
 ///
 /// ```dart
-/// import 'res/resource_string.dart';
+/// import 'gen_l10n/resource_string.dart';
 ///
 /// return MaterialApp(
 ///   localizationsDelegates: AppLocalizations.localizationsDelegates,

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 class FavoriteIconWidget extends StatefulWidget {
+  
   final void Function(bool isFavorite) onFavoriteChanged;
   final bool isFavorite;
 
   const FavoriteIconWidget({
-    Key? key,
+    super.key,
     required this.isFavorite,
     required this.onFavoriteChanged,
-  }) : super(key: key);
+  });
 
   @override
   State<StatefulWidget> createState() => _FavoriteIconState();

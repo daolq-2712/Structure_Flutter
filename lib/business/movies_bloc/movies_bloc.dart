@@ -1,8 +1,8 @@
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
-import '../../data/movie_type.dart';
-import '../../data/movie_repository.dart';
-import '../base_bloc.dart';
+import '/business/base_bloc.dart';
+import '/data/movie_type.dart';
+import '/data/movie_repository.dart';
 import 'movies_event.dart';
 import 'movies_state.dart';
 
@@ -39,7 +39,7 @@ class MoviesBloc extends BaseBloc<FetchMoviesEvent, FetchMoviesState> {
       }
 
       final connectResult = await connectivity.checkConnectivity();
-      if (connectResult == ConnectivityResult.none) {
+      if (connectResult.contains(ConnectivityResult.none)) {
         state = FetchMoviesError('Please check the network connection');
         stateController.add(state);
       }

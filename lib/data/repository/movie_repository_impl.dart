@@ -1,9 +1,9 @@
-import '../model/movie.dart';
-import '../model/movie_image.dart';
-import '../model/movie_info.dart';
-import '../movie_repository.dart';
-import '../remote/movie_service_client.dart';
-import '../remote/response/movie_response.dart';
+import '/data/model/movie.dart';
+import '/data/model/movie_image.dart';
+import '/data/model/movie_info.dart';
+import '/data/movie_repository.dart';
+import '/data/remote/movie_service_client.dart';
+import '/data/remote/response/movie_response.dart';
 
 class MovieRepositoryImpl extends MovieRepository {
   final MovieServiceClient _client;

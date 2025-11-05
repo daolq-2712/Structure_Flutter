@@ -11,14 +11,14 @@ class StarRating extends StatelessWidget {
   final double? size;
 
   const StarRating({
-    Key? key,
+    super.key,
     this.starCount = 5,
     this.rating = .0,
     this.onRatingChanged,
     this.color,
     this.borderColor,
     this.size,
-  }) : super(key: key);
+  });
 
   Widget buildStar(BuildContext context, int index) {
     Icon icon;

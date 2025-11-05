@@ -7,7 +7,7 @@ final ThemeData defaultTheme = ThemeData(
   scaffoldBackgroundColor: backgroundColor,
   fontFamily: 'HelveticaNeue',
   appBarTheme: const AppBarTheme(
-    color: backgroundColor,
+    backgroundColor: backgroundColor,
     iconTheme: IconThemeData(color: accentLightColor),
   ),
   buttonTheme: const ButtonThemeData(

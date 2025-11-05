@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/resource_string.dart';
 
 import '/business/movie_detail_bloc/movie_detail_bloc.dart';
 import '/business/movie_detail_bloc/movie_detail_state.dart';
 import '/data/model/movie.dart';
 import '/data/model/movie_info.dart';
 import '/data/repository/movie_repository_impl.dart';
+import '/gen_l10n/resource_string.dart';
 import '/presentation/widget/error_page.dart';
-import '../../widget/star_rating_widget.dart';
+import '/presentation/widget/star_rating_widget.dart';
 
 class MovieInfoView extends StatefulWidget {
   final Movie movie;

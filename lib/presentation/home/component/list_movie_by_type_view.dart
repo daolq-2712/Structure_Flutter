@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '/business/movies_bloc/movies_state.dart';
+import '/business/movies_bloc/movies_bloc.dart';
 import '/data/model/movie.dart';
 import '/data/movie_type.dart';
 import '/data/repository/movie_repository_impl.dart';
-import '/business/movies_bloc/movies_state.dart';
-import '/business/movies_bloc/movies_bloc.dart';
 import '/presentation/widget/error_page.dart';
 import '/utils/theme/colors.dart';
 import '/utils/constant.dart';
