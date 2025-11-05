@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../model/movie.dart';
+import '/data/model/movie.dart';
 
 class MovieResponse extends Equatable {
   final int? page;

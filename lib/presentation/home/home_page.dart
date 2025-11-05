@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../data/model/movie.dart';
-import '../movie_detail/movie_detail_page.dart';
+import '/data/model/movie.dart';
 import '/data/movie_type.dart';
 import '/presentation/home/component/list_movie_by_type_view.dart';
 import '/presentation/home/component/now_playing_slider_view.dart';
 import '/presentation/list_movie/list_movie_page.dart';
+import '/presentation/movie_detail/movie_detail_page.dart';
 import '/utils/theme/colors.dart';
 
 class HomePage extends StatefulWidget {

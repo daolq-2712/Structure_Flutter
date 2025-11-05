@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/resource_string.dart';
+import '/gen_l10n/resource_string.dart';
 
 enum MovieType {
   nowPlaying,

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/resource_string.dart';
+
+import '/gen_l10n/resource_string.dart';
 
 class ErrorPage extends StatelessWidget {
   final String message;
   final Function retry;
 
-  const ErrorPage({Key? key, required this.message, required this.retry})
-      : super(key: key);
+  const ErrorPage({super.key, required this.message, required this.retry});
 
   @override
   Widget build(BuildContext context) {

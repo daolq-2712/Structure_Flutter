@@ -1,7 +1,7 @@
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
+import '/business/base_bloc.dart';
 import '/data/movie_repository.dart';
-import '../base_bloc.dart';
 import 'movie_detail_event.dart';
 import 'movie_detail_state.dart';
 
