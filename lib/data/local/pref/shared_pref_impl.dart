@@ -54,12 +54,12 @@ class SharedPrefImpl implements SharedPrefApi {
   }
 
   @override
-  void clearKey(String key) async {
+  Future<void> clearKey(String key) async {
     await _sharedPreferences.remove(key);
   }
 
   @override
-  void clear() async {
+  Future<void> clear() async {
     await _sharedPreferences.clear();
   }
 }

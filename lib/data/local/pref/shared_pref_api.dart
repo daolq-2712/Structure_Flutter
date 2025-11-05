@@ -3,7 +3,7 @@ abstract class SharedPrefApi {
 
   void put<T>(String key, T? value);
 
-  void clearKey(String key);
+  Future<void> clearKey(String key);
 
-  void clear();
+  Future<void> clear();
 }
